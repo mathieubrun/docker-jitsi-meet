@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "jitsi-prosody.fullname" . }}
+  labels:
+    app.kubernetes.io/name: {{ include "jitsi-prosody.name" . }}
+    helm.sh/chart: {{ include "jitsi-prosody.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - name: xmpp-c2s
+      port: 5222
+      protocol: TCP
+    - name: xmpp-component
+      port: 5347
+      protocol: TCP 
+    - name: bosh-insecure
+      port: 5280
+      protocol: TCP
+  selector:
+    app.kubernetes.io/name: {{ include "jitsi-prosody.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}

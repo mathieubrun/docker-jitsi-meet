@@ -1,0 +1,207 @@
+jitsi-prosody:
+  fullnameOverride: prosody
+  configMap: global-config-map
+
+jitsi-meet:
+  fullnameOverride: meet
+  configMap: global-config-map
+
+jitsi-jicofo:
+  fullnameOverride: jicofo
+  configMap: global-config-map
+
+jitsi-video-bridge:
+  fullnameOverride: jvb
+  configMap: global-config-map
+
+#
+# Advanced configuration options (you generally don't need to change these)
+#
+global:
+  # System time zone.
+  tz: Europe/Amsterdam
+
+  # # IP address of the Docker host. See the "Running on a LAN environment" section
+  # # in the README.
+  hostAddress: 192.168.99.1
+
+  # Public URL for the web service.
+  publicUrl: https://meet.jitsi
+
+  # #
+  # # Let's Encrypt configuration
+  # #
+  # letsEncrypt:
+  #   # Enable Let's Encrypt certificate generation.
+  #   enable: '0'
+  #   # Domain for which to generate the certificate.
+  #   domain: meet.example.com
+  #   # E-Mail for receiving important account notifications (mandatory).
+  #   email: alice@atlanta.net
+
+  #
+  # Etherpad integration (for document sharing)
+  #
+
+  # Set etherpad-lite URL (uncomment to enable).
+  #etherpadUrlBase=http://etherpad.meet.jitsi:9001
+
+  #
+  # Authentication configuration (see README for details)
+  #
+  auth:
+    # Enable authentication.
+    enable: '0'
+    # Enable guest access.
+    guests: '1'
+
+    # type: jwt
+
+    jwt: {}
+    # # JWT auuthentication
+    # #
+    # jwt:
+    #   # Application identifier.
+    #   appId: my_jitsi_app_id
+
+    #   # Application secret known only to your token.
+    #   appSecret: my_jitsi_app_secret
+
+    #   # (Optional) Set asap_accepted_issuers as a comma separated list
+    #   acceptedIssuers: https://accepted.issuer
+
+    #   # (Optional) Set asap_keyserver to a url where public keys can be found
+    #   asapKeyServer: 
+
+    #   # (Optional) Allow anonymous users with no JWT while validating JWTs when provided
+    #   allowEmpty: '1'
+
+  xmpp:
+    # Internal XMPP server
+    server: prosody
+
+    # Internal XMPP server URL
+    boshUrlBase: http://prosody:5280
+    
+    domains:
+      # Internal XMPP domain.
+      base: jitsi
+
+      focus: jicofo.jitsi
+      # Internal XMPP domain for authenticated services.
+      auth: auth.jitsi
+      # XMPP domain for the MUC.
+      muc: muc.jitsi
+      # XMPP domain for the internal MUC used for jibri, jigasi and jvb pools.
+      internalMuc: internal-muc.jitsi
+      # XMPP domain for unauthenticated users.
+      guest: guest.jitsi
+
+
+    # Custom Prosody modules for XMPP_DOMAIN (comma separated)
+    modules:
+    # Custom Prosody modules for MUC component (comma separated)
+    mucModules:
+    # Custom Prosody modules for internal MUC component (comma separated)
+    internalMucModules:
+
+  jvb:
+    # MUC for the JVB pool.
+    breweryMuc: jvbbrewery
+
+    # XMPP user for JVB client connections.
+    auth:
+      user: jvb
+      password: passw0rd
+
+    # STUN servers used to discover the server's public IP.
+    stunServers: stun.l.google.com:19302,stun1.l.google.com:19302,stun2.l.google.com:19302
+
+    # Media port for the Jitsi Videobridge
+    udpPort: 10000
+
+    # TCP Fallback for Jitsi Videobridge for when UDP isn't available
+    tcpHarvesterDisabled: 'false'
+    tcpPort: 4443
+
+    # A comma separated list of APIs to enable when the JVB is started. The default is none.
+    # See https://github.com/jitsi/jitsi-videobridge/blob/master/doc/rest.md for more information
+    # enableApis: rest,colibri
+
+  jicofo:
+    # XMPP component password for Jicofo.
+    componentSecret: s3cr37
+
+    # XMPP user for Jicofo client connections. NOTE: this option doesn't currently work due to a bug.
+    auth:
+      user: focus
+      password: passw0rd
+
+  jigasi:
+    xmpp:
+      # XMPP user for Jigasi MUC client connections.
+      user: jigasi
+      # XMPP password for Jigasi MUC client connections.
+      password: passw0rd
+
+    # MUC name for the Jigasi pool.
+    breweryMuc: jigasibrewery
+
+    # Minimum port for media used by Jigasi.
+    port:
+      min: 20000
+      max: 20050
+
+    # #
+    # # Basic Jigasi configuration options (needed for SIP gateway support)
+    # #
+    # sip:
+    #   # SIP URI for incoming / outgoing calls.
+    #   uri:test@sip2sip.info
+
+    #   # Password for the specified SIP account as a clear text
+    #   password=passw0rd
+
+    #   # SIP server (use the SIP account domain if in doubt).
+    #   server: sip2sip.info
+
+    #   # SIP server port
+    #   port: 5060
+
+    #   # SIP server transport
+    #   transport: UDP
+
+    # # Enable SDES srtp
+    # enableSdesSrtp: '1'
+
+    # # Keepalive method
+    # sipKeepAliveMethod: OPTIONS
+    
+    # healthCheck:
+    #   # Health-check extension
+    #   SipUri: keepalive
+    #   # Health-check interval
+    #   interval: 300000
+
+    # # Enable Jigasi transcription.
+    # enableTranscriptions: '1'
+
+    # transcriber:
+    #   # Jigasi will recordord an audio when transcriber is on. Default false.
+    #   recordAudio: 'true'
+    #   # Jigasi will send transcribed text to the chat when transcriber is on. Default false.
+    #   sendTxt: 'true'
+    #   # Jigasi post to the chat an url with transcription file. Default false.
+    #   advertiseUrl: 'true'
+
+    # # Credentials for connect to Cloud Google API from Jigasi. Path located inside the container.
+    # # Please read https://cloud.google.com/text-to-speech/docs/quickstart-protocol
+    # # section "Before you begin" from 1 to 5 paragraph. Copy the key on
+    # # the docker host to ${CONFIG}/jigasi/key.json and to enable this setting:
+    # googleAppCredentials: /config/key.json
+
+  # https:
+  #   # Disable HTTPS. This can be useful if TLS connections are going to be handled outside of this setup.
+  #   disable: '1'
+  #   # Redirects HTTP traffic to HTTPS. Only works with the standard HTTPS port (443).
+  #   redirect: '0'

@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "jitsi-jicofo.fullname" . }}
+  labels:
+    app.kubernetes.io/name: {{ include "jitsi-jicofo.name" . }}
+    helm.sh/chart: {{ include "jitsi-jicofo.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - name: xmpp-c2s
+      port: {{ .Values.service.port }}
+      protocol: TCP
+  selector:
+    app.kubernetes.io/name: {{ include "jitsi-jicofo.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}

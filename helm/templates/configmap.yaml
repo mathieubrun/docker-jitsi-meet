@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: global-config-map
+  labels:
+    app.kubernetes.io/name: {{ include "jitsi.name" . }}
+    helm.sh/chart: {{ include "jitsi.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+data:
+  TZ: {{ .Values.global.tz }}
+  PUBLIC_URL: {{ .Values.global.publicUrl }}
+  DOCKER_HOST_ADDRESS: {{ .Values.global.hostAddress }}
+  XMPP_DOMAIN: {{ .Values.global.xmpp.domains.base }}
+  XMPP_SERVER: {{ .Values.global.xmpp.server }}
+  XMPP_BOSH_URL_BASE: {{ .Values.global.xmpp.boshUrlBase }}
+  XMPP_AUTH_DOMAIN: {{ .Values.global.xmpp.domains.auth }}
+  XMPP_MUC_DOMAIN: {{ .Values.global.xmpp.domains.muc }}
+  XMPP_INTERNAL_MUC_DOMAIN: {{ .Values.global.xmpp.domains.internalMuc }}
+  XMPP_GUEST_DOMAIN: {{ .Values.global.xmpp.domains.guest }}
+  XMPP_MODULES: {{ .Values.global.xmpp.modules }}
+  XMPP_MUC_MODULES: {{ .Values.global.xmpp.mucModules }}
+  XMPP_INTERNAL_MUC_MODULES: {{ .Values.global.xmpp.internalMucModules }}
+  JVB_BREWERY_MUC: {{ .Values.global.jvb.breweryMuc }}
+  JVB_AUTH_USER: {{ .Values.global.jvb.auth.user }}
+  JVB_AUTH_PASSWORD: {{ .Values.global.jvb.auth.password }}
+  JVB_STUN_SERVERS: {{ .Values.global.jvb.stunServers }}
+  JVB_PORT: '{{ .Values.global.jvb.udpPort }}'
+  JVB_TCP_HARVESTER_DISABLED: '{{ .Values.global.jvb.tcpHarvesterDisabled }}'
+  JVB_TCP_PORT: '{{ .Values.global.jvb.tcpPort }}'
+  JICOFO_COMPONENT_SECRET: {{ .Values.global.jicofo.componentSecret }}
+  JICOFO_AUTH_USER: {{ .Values.global.jicofo.auth.user }}
+  JICOFO_AUTH_PASSWORD: {{ .Values.global.jicofo.auth.password }}
+  JIGASI_XMPP_USER: {{ .Values.global.jigasi.xmpp.user }}
+  JIGASI_XMPP_PASSWORD: {{ .Values.global.jigasi.xmpp.password }}
+  JIGASI_BREWERY_MUC: {{ .Values.global.jigasi.breweryMuc }}
+  JIGASI_PORT_MIN: '{{ .Values.global.jigasi.portMin }}'
+  JIGASI_PORT_MAX: '{{ .Values.global.jigasi.portMax }}'
+  ENABLE_AUTH: '{{ .Values.global.auth.enable }}'
+  ENABLE_GUESTS: '{{ .Values.global.auth.guests }}'
+  AUTH_TYPE: {{ .Values.global.auth.type }}
+  JWT_APP_ID: {{ .Values.global.auth.jwt.appId }}
+  JWT_APP_SECRET: {{ .Values.global.auth.jwt.appSecret }}
+  JWT_ACCEPTED_ISSUERS: {{ .Values.global.auth.jwt.acceptedIssuers }}
+  JWT_ASAP_KEYSERVER: {{ .Values.global.auth.jwt.asapKeyServer }}
+  JWT_ALLOW_EMPTY: '{{ .Values.global.auth.jwt.allowEmpty }}'
