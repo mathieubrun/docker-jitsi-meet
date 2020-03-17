@@ -1,7 +1,7 @@
 replicaCount: 1
 
 image:
-  repository: jitsi/meet
+  repository: jitsi/web
   tag: "latest"
   pullPolicy: IfNotPresent
 
@@ -15,10 +15,10 @@ service:
 ingress:
   enabled: true
   annotations:
-    kubernetes.io/ingress.class: traefik
+    kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts:
-    - host: meet.jitsi
+    - host: meet.192.168.99.100.xip.io
       paths:
         - /
 

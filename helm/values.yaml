@@ -23,10 +23,10 @@ global:
 
   # # IP address of the Docker host. See the "Running on a LAN environment" section
   # # in the README.
-  hostAddress: 192.168.99.1
+  hostAddress: 192.168.99.100
 
   # Public URL for the web service.
-  publicUrl: https://meet.jitsi
+  publicUrl: http://meet.192.168.99.100.xip.io
 
   # #
   # # Let's Encrypt configuration
@@ -55,7 +55,7 @@ global:
     # Enable guest access.
     guests: '1'
 
-    # type: jwt
+    type: internal
 
     jwt: {}
     # # JWT auuthentication
@@ -99,11 +99,11 @@ global:
 
 
     # Custom Prosody modules for XMPP_DOMAIN (comma separated)
-    modules:
+    modules: ''
     # Custom Prosody modules for MUC component (comma separated)
-    mucModules:
+    mucModules: ''
     # Custom Prosody modules for internal MUC component (comma separated)
-    internalMucModules:
+    internalMucModules: ''
 
   jvb:
     # MUC for the JVB pool.

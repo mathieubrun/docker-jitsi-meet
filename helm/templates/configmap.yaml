@@ -18,9 +18,9 @@ data:
   XMPP_MUC_DOMAIN: {{ .Values.global.xmpp.domains.muc }}
   XMPP_INTERNAL_MUC_DOMAIN: {{ .Values.global.xmpp.domains.internalMuc }}
   XMPP_GUEST_DOMAIN: {{ .Values.global.xmpp.domains.guest }}
-  XMPP_MODULES: {{ .Values.global.xmpp.modules }}
-  XMPP_MUC_MODULES: {{ .Values.global.xmpp.mucModules }}
-  XMPP_INTERNAL_MUC_MODULES: {{ .Values.global.xmpp.internalMucModules }}
+  XMPP_MODULES: '{{ .Values.global.xmpp.modules }}'
+  XMPP_MUC_MODULES: '{{ .Values.global.xmpp.mucModules }}'
+  XMPP_INTERNAL_MUC_MODULES: '{{ .Values.global.xmpp.internalMucModules }}'
   JVB_BREWERY_MUC: {{ .Values.global.jvb.breweryMuc }}
   JVB_AUTH_USER: {{ .Values.global.jvb.auth.user }}
   JVB_AUTH_PASSWORD: {{ .Values.global.jvb.auth.password }}
@@ -39,8 +39,8 @@ data:
   ENABLE_AUTH: '{{ .Values.global.auth.enable }}'
   ENABLE_GUESTS: '{{ .Values.global.auth.guests }}'
   AUTH_TYPE: {{ .Values.global.auth.type }}
-  JWT_APP_ID: {{ .Values.global.auth.jwt.appId }}
-  JWT_APP_SECRET: {{ .Values.global.auth.jwt.appSecret }}
-  JWT_ACCEPTED_ISSUERS: {{ .Values.global.auth.jwt.acceptedIssuers }}
-  JWT_ASAP_KEYSERVER: {{ .Values.global.auth.jwt.asapKeyServer }}
-  JWT_ALLOW_EMPTY: '{{ .Values.global.auth.jwt.allowEmpty }}'
+  # JWT_APP_ID: {{ .Values.global.auth.jwt.appId }}
+  # JWT_APP_SECRET: {{ .Values.global.auth.jwt.appSecret }}
+  # JWT_ACCEPTED_ISSUERS: {{ .Values.global.auth.jwt.acceptedIssuers }}
+  # JWT_ASAP_KEYSERVER: {{ .Values.global.auth.jwt.asapKeyServer }}
+  # JWT_ALLOW_EMPTY: '{{ .Values.global.auth.jwt.allowEmpty }}'
